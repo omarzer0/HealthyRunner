@@ -7,7 +7,7 @@
     <fragment
         android:id="@+id/runFragment"
         android:name="az.zero.healthyrunner.ui.fragments.RunFragment"
-        android:label="RunFragment" >
+        android:label="RunFragment">
         <action
             android:id="@+id/action_runFragment_to_trackingFragment"
             app:destination="@id/trackingFragment" />
@@ -19,7 +19,7 @@
     <fragment
         android:id="@+id/setupFragment"
         android:name="az.zero.healthyrunner.ui.fragments.SetupFragment"
-        android:label="SetupFragment" >
+        android:label="SetupFragment">
         <action
             android:id="@+id/action_setupFragment_to_runFragment"
             app:destination="@id/runFragment" />
@@ -31,9 +31,14 @@
     <fragment
         android:id="@+id/trackingFragment"
         android:name="az.zero.healthyrunner.ui.fragments.TrackingFragment"
-        android:label="TrackingFragment" >
+        android:label="TrackingFragment">
         <action
             android:id="@+id/action_trackingFragment_to_runFragment"
             app:destination="@id/runFragment" />
     </fragment>
+
+    <action
+        android:id="@+id/action_global_trackingFragment"
+        app:destination="@id/trackingFragment"
+        app:launchSingleTop="true" />
 </navigation>

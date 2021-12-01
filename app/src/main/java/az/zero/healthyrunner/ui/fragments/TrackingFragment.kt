@@ -1,11 +1,14 @@
 package az.zero.healthyrunner.ui.fragments
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import az.zero.healthyrunner.R
+import az.zero.healthyrunner.services.TrackingService
 import az.zero.healthyrunner.ui.viewmodels.MainViewModel
+import az.zero.healthyrunner.utils.Constants.ACTION_START_OR_RESUME_SERVICE
 import com.google.android.gms.maps.GoogleMap
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_tracking.*
@@ -20,10 +23,20 @@ class TrackingFragment : Fragment(R.layout.fragment_tracking) {
         super.onViewCreated(view, savedInstanceState)
         mapView.onCreate(savedInstanceState)
 
+        btnToggleRun.setOnClickListener {
+            sendCommandToService(ACTION_START_OR_RESUME_SERVICE)
+        }
+
         mapView.getMapAsync {
             map = it
         }
     }
+
+    private fun sendCommandToService(passedAction: String) =
+        Intent(requireContext(), TrackingService::class.java).also {
+            it.action = passedAction
+            requireContext().startService(it)
+        }
 
     override fun onResume() {
         super.onResume()
